@@ -27,7 +27,7 @@ class AttrsBridge(MQTTBase):
         logger.infof('AttrsBridge finish')
 
     def _on_receive(self, msg):
-        logger.infof('received message from ros : {}', str(msg).replace('\n', ' '))
+        logger.debugf('received message from ros : {}', str(msg).replace('\n', ' '))
 
         timestamp = datetime.datetime.now(pytz.timezone('Asia/Tokyo')).strftime('%Y-%m-%dT%H:%M:%S.%f%z')
         msg = PAYLOAD_FMT.format(timestamp=timestamp, x=msg.x, y=msg.y, z=msg.z, theta=msg.theta)
