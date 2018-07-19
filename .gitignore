@@ -1,1 +1,3 @@
 *.py[co]
+secrets/ca.crt
+config/mqtt.yaml
