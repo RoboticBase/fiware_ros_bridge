@@ -5,4 +5,10 @@
     <rosparam command="load" file="$(find fiware_ros_turtlebot3_bridge)/config/turtlebot3_cmd.yaml"/>
     <param name="mqtt/cafile" value="$(find fiware_ros_turtlebot3_bridge)/secrets/ca.crt"/>
   </node>
+  <node name="turtlebot3_attrs" pkg="fiware_ros_turtlebot3_bridge" type="turtlebot3_attrs.py" output="screen">
+    <rosparam command="delete" param=""/>
+    <rosparam command="load" file="$(find fiware_ros_turtlebot3_bridge)/config/mqtt.yaml"/>
+    <rosparam command="load" file="$(find fiware_ros_turtlebot3_bridge)/config/turtlebot3_attrs.yaml"/>
+    <param name="mqtt/cafile" value="$(find fiware_ros_turtlebot3_bridge)/secrets/ca.crt"/>
+  </node>
 </launch>

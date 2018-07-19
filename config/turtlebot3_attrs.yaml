@@ -1,0 +1,3 @@
+topics:
+  mqtt: "/robot/turtlebot3/attrs"
+  ros: "/turtlebot3_bridge/attrs"
