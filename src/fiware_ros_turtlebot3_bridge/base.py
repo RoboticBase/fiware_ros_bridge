@@ -25,7 +25,8 @@ class MQTTBase(object):
         self.__client.on_connect = self._on_connect
         self.__client.on_message = self._on_message
 
-        if 'cafile' in self.__params['mqtt']:
+        if 'use_ca' in self.__params['mqtt'] and self.__params['mqtt']['use_ca'] and 'cafile' in self.__params['mqtt']:
+
             cafile = self.__params['mqtt']['cafile'].strip()
             if len(cafile) > 0 and os.path.isfile(cafile):
                 self.__client.tls_set(cafile, tls_version=ssl.PROTOCOL_TLSv1_2)

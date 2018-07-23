@@ -3,3 +3,4 @@ mqtt:
   port: ${MQTT_PORT}
   username: "${MQTT_USERNAME}"
   password: "${MQTT_PASSWORD}"
+  use_ca: true
