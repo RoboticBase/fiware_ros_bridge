@@ -5,7 +5,8 @@ import pytz
 
 import rospy
 
-from fiware_ros_turtlebot3_bridge.msg import r_pos
+from fiware_ros_turtlebot3_msgs.msg import r_pos
+
 from fiware_ros_turtlebot3_bridge.base import MQTTBase
 
 from fiware_ros_turtlebot3_bridge.logging import getLogger

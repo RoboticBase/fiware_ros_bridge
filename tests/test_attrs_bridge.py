@@ -10,7 +10,8 @@ from parameterized import parameterized
 
 import freezegun
 
-from fiware_ros_turtlebot3_bridge.msg import r_pos
+from fiware_ros_turtlebot3_msgs.msg import r_pos
+
 from fiware_ros_turtlebot3_bridge.attrs_bridge import AttrsBridge
 
 from . import utils
