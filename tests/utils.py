@@ -44,7 +44,15 @@ def get_attrs_params(use_ca=False, cafile=False, username=False, password=False)
     params = __get_mqtt_params(use_ca=use_ca, cafile=cafile, username=username, password=password)
     params['topics'] = {
         'mqtt': '/robot/turtlebot3/attrs',
-        'ros': '/turtlebot3_bridge/attrs',
+        'ros': {
+            'pos': '/turtlebot3_bridge/attrs',
+            'battery_state': '/battery_state',
+        },
+    }
+    params['thresholds'] = {
+        'battery_state': {
+            'send_delta_millisec': 1000,
+        },
     }
     return params
 

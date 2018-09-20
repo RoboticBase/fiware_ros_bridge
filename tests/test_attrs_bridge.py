@@ -4,11 +4,13 @@ import ssl
 
 import rosunit
 
-from mock import patch
+from mock import patch, call
 
 from parameterized import parameterized
 
 import freezegun
+
+from sensor_msgs.msg import BatteryState
 
 from fiware_ros_turtlebot3_msgs.msg import r_pos
 
@@ -24,7 +26,13 @@ class TestAttrsBridge(unittest.TestCase):
         mocked_rospy.get_param.return_value = utils.get_attrs_params()
 
         bridge = AttrsBridge()
-        mocked_rospy.Subscriber.assert_called_once_with('/turtlebot3_bridge/attrs', r_pos, bridge._on_receive, queue_size=10)
+        mocked_rospy.Subscriber.assert_called()
+        called_args = mocked_rospy.Subscriber.call_args_list
+        assert len(called_args) == 2
+        assert called_args[0] == call('/turtlebot3_bridge/attrs',
+                                      r_pos, bridge._on_receive_pos, queue_size=10)
+        assert called_args[1] == call('/battery_state',
+                                      BatteryState, bridge._on_receive_battery_state, queue_size=10)
 
     @parameterized.expand(utils.expand_ca_params)
     @patch('fiware_ros_turtlebot3_bridge.base.mqtt')
@@ -61,7 +69,7 @@ class TestAttrsBridge(unittest.TestCase):
     @freezegun.freeze_time('2018-01-02T03:04:05+09:00')
     @patch('fiware_ros_turtlebot3_bridge.base.mqtt')
     @patch('fiware_ros_turtlebot3_bridge.attrs_bridge.rospy')
-    def test__on_receive(self, mocked_rospy, mocked_mqtt):
+    def test__on_receive_pos(self, mocked_rospy, mocked_mqtt):
         mocked_rospy.get_param.return_value = utils.get_attrs_params()
         mocked_mqtt_client = mocked_mqtt.Client.return_value
 
@@ -71,7 +79,7 @@ class TestAttrsBridge(unittest.TestCase):
         msg.z = 0.3
         msg.theta = 0.4
 
-        AttrsBridge().connect()._on_receive(msg)
+        AttrsBridge().connect()._on_receive_pos(msg)
         payload = '2018-01-02T03:04:05.000000+0900|x|0.1|y|0.2|z|0.3|theta|0.4'
         mocked_mqtt_client.publish.assert_called_once_with('/robot/turtlebot3/attrs', payload)
 
