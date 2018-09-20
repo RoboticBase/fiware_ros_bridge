@@ -6,3 +6,4 @@ topics:
 thresholds:
   battery_state:
     send_delta_millisec: 1000
+timezone: "Asia/Tokyo"

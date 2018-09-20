@@ -54,6 +54,7 @@ def get_attrs_params(use_ca=False, cafile=False, username=False, password=False)
             'send_delta_millisec': 1000,
         },
     }
+    params['timezone'] = 'Asia/Tokyo'
     return params
 
 

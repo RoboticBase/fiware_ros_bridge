@@ -28,7 +28,7 @@ class AttrsBridge(MQTTBase):
                          BatteryState, self._on_receive_battery_state, queue_size=10)
         self.__attrs_topic = self.__params['topics']['mqtt']
 
-        self.__tz = pytz.timezone('Asia/Tokyo')
+        self.__tz = pytz.timezone(self.__params['timezone'])
         self.__send_delta_ms = self.__params['thresholds']['battery_state']['send_delta_millisec']
         self.__prev_ms = datetime.datetime.now(self.__tz)
         self.__lock = Lock()
