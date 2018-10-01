@@ -83,6 +83,44 @@ class TestAttrsBridge(unittest.TestCase):
         payload = '2018-01-02T03:04:05.000000+0900|x|0.1|y|0.2|z|0.3|theta|0.4'
         mocked_mqtt_client.publish.assert_called_once_with('/robot/turtlebot3/attrs', payload)
 
+    @patch('fiware_ros_turtlebot3_bridge.base.mqtt')
+    @patch('fiware_ros_turtlebot3_bridge.attrs_bridge.rospy')
+    def test__on_receive_battery_state_under_threshold(self, mocked_rospy, mocked_mqtt):
+        mocked_rospy.get_param.return_value = utils.get_attrs_params()
+        mocked_mqtt_client = mocked_mqtt.Client.return_value
+
+        with freezegun.freeze_time('2018-01-02T03:04:05.123456+09:00'):
+            bridge = AttrsBridge().connect()
+
+        with freezegun.freeze_time('2018-01-02T03:04:05.123457+09:00'):
+            bridge._on_receive_battery_state(BatteryState())
+
+        mocked_mqtt_client.publish.assert_not_called()
+
+    @patch('fiware_ros_turtlebot3_bridge.base.mqtt')
+    @patch('fiware_ros_turtlebot3_bridge.attrs_bridge.rospy')
+    def test__on_receive_battery_state_over_threshold(self, mocked_rospy, mocked_mqtt):
+        mocked_rospy.get_param.return_value = utils.get_attrs_params()
+        mocked_mqtt_client = mocked_mqtt.Client.return_value
+
+        with freezegun.freeze_time('2018-01-02T03:04:05.123456+09:00'):
+            bridge = AttrsBridge().connect()
+
+        battery = BatteryState()
+        battery.voltage = 0.1
+        battery.current = 0.2
+        battery.charge = 0.3
+        battery.capacity = 0.4
+        battery.design_capacity = 0.5
+        battery.percentage = 0.6
+
+        with freezegun.freeze_time('2018-01-02T03:04:06.123457+09:00'):
+            bridge._on_receive_battery_state(battery)
+
+        payload = '2018-01-02T03:04:06.123457+0900|voltage|0.1|current|0.2|charge|0.3|capacity|0.4|' \
+                  'design_capacity|0.5|percentage|0.6'
+        mocked_mqtt_client.publish.assert_called_once_with('/robot/turtlebot3/attrs', payload)
+
 
 if __name__ == '__main__':
     rosunit.unitrun('fiware_ros_turtlebot3_bridge', 'test_atrs_bridge', TestAttrsBridge)
