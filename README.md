@@ -1,7 +1,7 @@
 # fiware_ros_turtlebot3_bridge
 This ros package acts as a bridge between [FIWARE](https://www.fiware.org) and [ROS](http://wiki.ros.org/) through MQTT.
 
-[![TravisCI Status](https://travis-ci.org/tech-sketch/fiware_ros_turtlebot3_bridge.svg?branch=master)](https://travis-ci.org/tech-sketch/fiware_ros_turtlebot3_bridge)
+[![TravisCI Status](https://travis-ci.org/RoboticBase/fiware_ros_turtlebot3_bridge.svg?branch=master)](https://travis-ci.org/RoboticBase/fiware_ros_turtlebot3_bridge)
 
 ## Description
 ### `turtlebot3_cmd`
@@ -23,7 +23,7 @@ When receiving a ROS message from the topic, this node publishes the received me
 
 ```bash
 $ cd ~/ros_ws/src
-$ git clone https://github.com/tech-sketch/fiware_ros_turtlebot3_bridge.git
+$ git clone https://github.com/RoboticBase/fiware_ros_turtlebot3_bridge.git
 $ pip install -r fiware_ros_turtlebot3_bridge/requirements/common.txt
 ```
 
