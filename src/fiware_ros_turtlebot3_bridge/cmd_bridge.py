@@ -53,10 +53,10 @@ class CmdBridge(MQTTBase):
                 cmd = String(data=CMD_DEFINITIONS[value])
                 self.__turtlebot3_cmd_pub.publish(cmd)
 
-                result = 'cmd "{}" executed successfully'.format(value)
+                result = 'cmd {} executed successfully'.format(value)
 
             else:
-                result = 'unknown cmd "{}" did not executed'.format(value)
+                result = 'unknown cmd {} did not executed'.format(value)
 
             client.publish(self.__params['topics']['mqtt']['result'],
                            RESULT_FMT.format(device_id=device_id, command=command, result=result))
