@@ -87,11 +87,11 @@ class TestCmdBridge(unittest.TestCase):
         if mcmd in ('circle', 'square', 'triangle', 'cross', 'up', 'down', 'left', 'right'):
             mocked_rospy.Publisher.return_value.publish.assert_called_once_with(String(data=rcmd))
             mocked_client.publish.assert_called_once_with('/robot/turtlebot3/cmdexe',
-                                                          'deviceid@move|cmd "{}" executed successfully'.format(mcmd))
+                                                          'deviceid@move|cmd {} executed successfully'.format(mcmd))
         else:
             mocked_rospy.Publisher.return_value.publish.assert_not_called()
             mocked_client.publish.assert_called_once_with('/robot/turtlebot3/cmdexe',
-                                                          'deviceid@move|unknown cmd "{}" did not executed'.format(mcmd))
+                                                          'deviceid@move|unknown cmd {} did not executed'.format(mcmd))
 
 
 if __name__ == '__main__':
