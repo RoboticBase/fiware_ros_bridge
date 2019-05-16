@@ -4,9 +4,9 @@ import re
 import rospy
 from std_msgs.msg import String
 
-from fiware_ros_turtlebot3_bridge.base import MQTTBase
+from fiware_ros_bridge.base import MQTTBase
 
-from fiware_ros_turtlebot3_bridge.logging import getLogger
+from fiware_ros_bridge.logging import getLogger
 logger = getLogger(__name__)
 
 CMD_RE = re.compile(r'^(?P<device_id>.+)@(?P<command>[^|]+)\|(?P<value>.+)$')
@@ -20,7 +20,8 @@ CMD_DEFINITIONS = {
     'up': 'up',
     'down': 'down',
     'left': 'left',
-    'right': 'right'
+    'right': 'right',
+    'return': 'return'
 }
 
 
@@ -28,7 +29,7 @@ class CmdBridge(MQTTBase):
     def __init__(self):
         self.__params = rospy.get_param('~')
         super(CmdBridge, self).__init__(self.__params)
-        self.__turtlebot3_cmd_pub = rospy.Publisher(self.__params['topics']['ros'], String, queue_size=10)
+        self.__cmd_pub = rospy.Publisher(self.__params['topics']['ros'], String, queue_size=10)
 
     def start(self):
         logger.infof('CmdBridge start')
@@ -51,7 +52,7 @@ class CmdBridge(MQTTBase):
 
             if value in CMD_DEFINITIONS:
                 cmd = String(data=CMD_DEFINITIONS[value])
-                self.__turtlebot3_cmd_pub.publish(cmd)
+                self.__cmd_pub.publish(cmd)
 
                 result = 'cmd {} executed successfully'.format(value)
 
