@@ -40,6 +40,20 @@ $ cp src/fiware_ros_bridge/config/mqtt.yaml.template src/fiware_ros_bridge/confi
 $ vi src/fiware_ros_bridge/config/mqtt.yaml
 ```
 
+### configure parameters of attrs
+
+```bash
+$ cp src/fiware_ros_bridge/config/robot_attrs.yaml.template src/fiware_ros_bridge/config/robot_attrs.yaml
+$ vi src/fiware_ros_bridge/config/robot_attrs.yaml
+```
+
+### configure parameters of cmd
+
+```bash
+$ cp src/fiware_ros_bridge/config/robot_cmd.yaml.template src/fiware_ros_bridge/config/robot_cmd.yaml
+$ vi src/fiware_ros_bridge/config/robot_cmd.yaml
+```
+
 ## How to Run
 
 ```bash
