@@ -9,7 +9,7 @@ from mock import patch
 
 from parameterized import parameterized, param
 
-from fiware_ros_turtlebot3_bridge.logging import getLogger
+from fiware_ros_bridge.logging import getLogger
 
 
 class TestGetLogger(unittest.TestCase):
@@ -21,7 +21,7 @@ class TestGetLogger(unittest.TestCase):
         param(logm='errorf', rosm='logerr'),
         param(logm='fatalf', rosm='logfatal'),
     ])
-    @patch('fiware_ros_turtlebot3_bridge.logging.rospy')
+    @patch('fiware_ros_bridge.logging.rospy')
     def test_log_wo_params(self, mocked_rospy, logm, rosm):
         name = 'foo'
         message = 'test message'
@@ -44,7 +44,7 @@ class TestGetLogger(unittest.TestCase):
         param(logm='errorf', rosm='logerr'),
         param(logm='fatalf', rosm='logfatal'),
     ])
-    @patch('fiware_ros_turtlebot3_bridge.logging.rospy')
+    @patch('fiware_ros_bridge.logging.rospy')
     def test_log_w_params(self, mocked_rospy, logm, rosm):
         name = 'foo'
         message = 'test message'
@@ -70,4 +70,4 @@ class TestGetLogger(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    rosunit.unitrun('fiware_ros_turtlebot3_bridge', 'test_logging', TestGetLogger)
+    rosunit.unitrun('fiware_ros_bridge', 'test_logging', TestGetLogger)
