@@ -1,6 +1,7 @@
 # fiware_ros_bridge
 This ros package acts as a bridge between [FIWARE](https://www.fiware.org) and [ROS](http://wiki.ros.org/) through MQTT.
 
+[![TravisCI Status](https://travis-ci.org/RoboticBase/fiware_ros_bridge.svg?branch=master)](https://travis-ci.org/RoboticBase/fiware_ros_bridge)
 
 ## Description
 ### `robot_cmd`
