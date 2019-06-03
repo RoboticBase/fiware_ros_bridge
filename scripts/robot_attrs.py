@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 import rospy
 
-from fiware_ros_turtlebot3_bridge.attrs_bridge import AttrsBridge
+from fiware_ros_bridge.attrs_bridge import AttrsBridge
 
-NODE_NAME = 'turtlebot3_attrs'
+NODE_NAME = 'robot_attrs'
 
 
 def main():

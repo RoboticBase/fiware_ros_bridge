@@ -1,0 +1,14 @@
+<launch>
+  <node name="robot_cmd" pkg="fiware_ros_bridge" type="robot_cmd.py" output="screen">
+    <rosparam command="delete" param=""/>
+    <rosparam command="load" file="$(find fiware_ros_bridge)/config/mqtt.yaml"/>
+    <rosparam command="load" file="$(find fiware_ros_bridge)/config/robot_cmd.yaml"/>
+    <param name="mqtt/cafile" value="$(find fiware_ros_bridge)/certs/DST_Root_CA_X3.pem"/>
+  </node>
+  <node name="robot_attrs" pkg="fiware_ros_bridge" type="robot_attrs.py" output="screen">
+    <rosparam command="delete" param=""/>
+    <rosparam command="load" file="$(find fiware_ros_bridge)/config/mqtt.yaml"/>
+    <rosparam command="load" file="$(find fiware_ros_bridge)/config/robot_attrs.yaml"/>
+    <param name="mqtt/cafile" value="$(find fiware_ros_bridge)/certs/DST_Root_CA_X3.pem"/>
+  </node>
+</launch>

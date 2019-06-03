@@ -46,13 +46,12 @@ def get_attrs_params(use_ca=False, cafile=False, username=False, password=False)
         'mqtt': '/robot/turtlebot3/attrs',
         'ros': {
             'pos': '/turtlebot3_bridge/attrs',
+            'r_mode': '/r_mode',
             'battery_state': '/battery_state',
         },
     }
     params['thresholds'] = {
-        'battery_state': {
-            'send_delta_millisec': 1000,
-        },
+        'send_delta_millisec': 1000,
     }
     params['timezone'] = 'Asia/Tokyo'
     return params
