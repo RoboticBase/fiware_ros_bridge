@@ -6,7 +6,7 @@ import rospy
 
 import paho.mqtt.client as mqtt
 
-from fiware_ros_turtlebot3_bridge.logging import getLogger
+from fiware_ros_bridge.logging import getLogger
 logger = getLogger(__name__)
 
 

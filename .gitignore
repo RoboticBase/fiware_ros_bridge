@@ -1,3 +1,5 @@
 *.py[co]
 secrets/ca.crt
 config/mqtt.yaml
+config/robot_attrs.yaml
+config/robot_cmd.yaml

@@ -11,14 +11,14 @@ from parameterized import parameterized, param
 
 from std_msgs.msg import String
 
-from fiware_ros_turtlebot3_bridge.cmd_bridge import CmdBridge
+from fiware_ros_bridge.cmd_bridge import CmdBridge
 
 from . import utils
 
 
 class TestCmdBridge(unittest.TestCase):
 
-    @patch('fiware_ros_turtlebot3_bridge.cmd_bridge.rospy')
+    @patch('fiware_ros_bridge.cmd_bridge.rospy')
     def test_init(self, mocked_rospy):
         mocked_rospy.get_param.return_value = utils.get_cmd_params()
 
@@ -26,9 +26,9 @@ class TestCmdBridge(unittest.TestCase):
         mocked_rospy.Publisher.assert_called_once_with('/turtlebot3_bridge/cmd', String, queue_size=10)
 
     @parameterized.expand(utils.expand_ca_params)
-    @patch('fiware_ros_turtlebot3_bridge.base.mqtt')
-    @patch('fiware_ros_turtlebot3_bridge.base.rospy')
-    @patch('fiware_ros_turtlebot3_bridge.cmd_bridge.rospy')
+    @patch('fiware_ros_bridge.base.mqtt')
+    @patch('fiware_ros_bridge.base.rospy')
+    @patch('fiware_ros_bridge.cmd_bridge.rospy')
     def test_connect(self, mocked_rospy, mocked_base_rospy, mocked_mqtt, use_ca, cafile, username, password):
         mocked_rospy.get_param.return_value = utils.get_cmd_params(use_ca, cafile, username, password)
         mocked_mqtt_client = mocked_mqtt.Client.return_value
@@ -50,14 +50,14 @@ class TestCmdBridge(unittest.TestCase):
 
         mocked_base_rospy.on_shutdown.assert_called_once_with(bridge._on_shutdown)
 
-    @patch('fiware_ros_turtlebot3_bridge.cmd_bridge.rospy')
+    @patch('fiware_ros_bridge.cmd_bridge.rospy')
     def test_start(self, mocked_rospy):
         mocked_rospy.get_param.return_value = utils.get_cmd_params()
 
         CmdBridge().start()
         mocked_rospy.spin.assert_called_once_with()
 
-    @patch('fiware_ros_turtlebot3_bridge.cmd_bridge.rospy')
+    @patch('fiware_ros_bridge.cmd_bridge.rospy')
     def test__on_connect(self, mocked_rospy):
         mocked_rospy.get_param.return_value = utils.get_cmd_params()
         mocked_client = MagicMock()
@@ -76,7 +76,7 @@ class TestCmdBridge(unittest.TestCase):
         param(mcmd='right', rcmd='right'),
         param(mcmd='invalid', rcmd=None),
     ])
-    @patch('fiware_ros_turtlebot3_bridge.cmd_bridge.rospy')
+    @patch('fiware_ros_bridge.cmd_bridge.rospy')
     def test__on_message(self, mocked_rospy, mcmd, rcmd):
         mocked_rospy.get_param.return_value = utils.get_cmd_params()
         mocked_client = MagicMock()
@@ -95,4 +95,4 @@ class TestCmdBridge(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    rosunit.unitrun('fiware_ros_turtlebot3_bridge', 'test_cmd_bridge', TestCmdBridge)
+    rosunit.unitrun('fiware_ros_bridge', 'test_cmd_bridge', TestCmdBridge)

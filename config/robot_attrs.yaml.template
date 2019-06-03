@@ -1,0 +1,9 @@
+topics:
+  mqtt: "/${ROBOT_TYPE}/${ROBOT_ID}/attrs"
+  ros:
+    pos: "/robot_bridge/attrs"
+    r_mode: "/r_mode"
+    battery_state: "/battery"
+thresholds:
+  send_delta_millisec: 1000
+timezone: "Asia/Tokyo"

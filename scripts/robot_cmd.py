@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 import rospy
 
-from fiware_ros_turtlebot3_bridge.cmd_bridge import CmdBridge
+from fiware_ros_bridge.cmd_bridge import CmdBridge
 
-NODE_NAME = 'turtlebot3_cmd'
+NODE_NAME = 'robot_cmd'
 
 
 def main():

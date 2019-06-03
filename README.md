@@ -1,15 +1,15 @@
-# fiware_ros_turtlebot3_bridge
+# fiware_ros_bridge
 This ros package acts as a bridge between [FIWARE](https://www.fiware.org) and [ROS](http://wiki.ros.org/) through MQTT.
 
-[![TravisCI Status](https://travis-ci.org/RoboticBase/fiware_ros_turtlebot3_bridge.svg?branch=master)](https://travis-ci.org/RoboticBase/fiware_ros_turtlebot3_bridge)
+[![TravisCI Status](https://travis-ci.org/RoboticBase/fiware_ros_bridge.svg?branch=master)](https://travis-ci.org/RoboticBase/fiware_ros_bridge)
 
 ## Description
-### `turtlebot3_cmd`
+### `robot_cmd`
 This ROS node receives a command from [FIWARE orion context broker](https://catalogue-server.fiware.org/enablers/publishsubscribe-context-broker-orion-context-broker) through MQTT.
 
 When receiving a command, this node publish a ROS message to a ROS topic.
 
-### `turtlebot3_attrs`
+### `robot_attrs`
 This ROS node subscribes a ROS topic.
 
 When receiving a ROS message from the topic, this node publishes the received messae to FIWARE orion context broker through MQTT.
@@ -23,34 +23,48 @@ When receiving a ROS message from the topic, this node publishes the received me
 
 ```bash
 $ cd ~/ros_ws/src
-$ git clone https://github.com/RoboticBase/fiware_ros_turtlebot3_bridge.git
-$ pip install -r fiware_ros_turtlebot3_bridge/requirements/common.txt
+$ git clone https://github.com/RoboticBase/fiware_ros_bridge.git
+$ pip install -r fiware_ros_bridge/requirements/common.txt
 ```
 
 ### scp cert file (if you need)
 If your MQTT Broker has TLS encryption, you have to set the root certification file.
 
 ```bash
-$ scp /path/to/your/cert_file.crt ${user}@${turtlebot3}:${ROS_WS}/src/fiware_ros_turtlebot3_bridge/secrets/ca.crt
+$ scp /path/to/your/cert_file.crt ${user}@${robot}:${ROS_WS}/src/fiware_ros_bridge/secrets/ca.crt
 ```
 
 ### configure parameters to connect MQTT broker
 
 ```bash
-$ cp src/fiware_ros_turtlebot3_bridge/config/mqtt.yaml.template src/fiware_ros_turtlebot3_bridge/config/mqtt.yaml
-$ vi src/fiware_ros_turtlebot3_bridge/config/mqtt.yaml
+$ cp src/fiware_ros_bridge/config/mqtt.yaml.template src/fiware_ros_bridge/config/mqtt.yaml
+$ vi src/fiware_ros_bridge/config/mqtt.yaml
+```
+
+### configure parameters of attrs
+
+```bash
+$ cp src/fiware_ros_bridge/config/robot_attrs.yaml.template src/fiware_ros_bridge/config/robot_attrs.yaml
+$ vi src/fiware_ros_bridge/config/robot_attrs.yaml
+```
+
+### configure parameters of cmd
+
+```bash
+$ cp src/fiware_ros_bridge/config/robot_cmd.yaml.template src/fiware_ros_bridge/config/robot_cmd.yaml
+$ vi src/fiware_ros_bridge/config/robot_cmd.yaml
 ```
 
 ## How to Run
 
 ```bash
-$ roslaunch fiware_ros_turtlebot3_bridge fiware_ros_turtlebot3_bridge.launch
+$ roslaunch fiware_ros_bridge fiware_ros_bridge.launch
 ```
 
 **Confirm that the log messages like below are shown.**
 ```text
-[INFO] [1531975302.196302]: [fiware_ros_turtlebot3_bridge.base:CmdBridge._on_connect] connected to mqtt broker, status=0
-[INFO] [1531975302.204255]: [fiware_ros_turtlebot3_bridge.base:AttrsBridge._on_connect] connected to mqtt broker, status=0
+[INFO] [1531975302.196302]: [fiware_ros_bridge.base:CmdBridge._on_connect] connected to mqtt broker, status=0
+[INFO] [1531975302.204255]: [fiware_ros_bridge.base:AttrsBridge._on_connect] connected to mqtt broker, status=0
 ```
 
 If `status` is not 0, mqtt.yaml and/or ca.crt is invalid.

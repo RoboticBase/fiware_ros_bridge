@@ -1,0 +1,5 @@
+topics:
+  mqtt:
+    cmd: "/${ROBOT_TYPE}/${ROBOT_ID}/cmd"
+    result: "/${ROBOT_TYPE}/${ROBOT_ID}/cmdexe"
+  ros: "/robot_bridge/cmd"
