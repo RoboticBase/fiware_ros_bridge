@@ -21,7 +21,10 @@ CMD_DEFINITIONS = {
     'down': 'down',
     'left': 'left',
     'right': 'right',
-    'return': 'return'
+    'return': 'return',
+    'inventory': 'inventory',
+    'destination': 'destination',
+    'home': 'home'
 }
 
 
